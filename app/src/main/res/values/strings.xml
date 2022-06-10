@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">CS GO Matches</string>
+    <string name="an_error_occurred_try_again">Ocorreu um erro! Tente novamente.</string>
+    <string name="team_with_no_id">Time sem slug</string>
+    <string name="league_with_no_id">Liga sem id</string>
+    <string name="match_with_league">Partida sem liga</string>
+    <string name="match_with_serie">Partida sem série</string>
+    <string name="match_with_opponent">Partida sem oponentes</string>
+    <string name="more_than_one_opponent_founded">Mais de um oponente encontrado</string>
 </resources>
