@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -38,6 +39,9 @@ android {
 
 dependencies {
 
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
     def timber_version = '4.7.1'
     implementation "com.jakewharton.timber:timber:$timber_version"
 
@@ -47,6 +51,11 @@ dependencies {
 
     def interceptor_version = "4.9.2"
     implementation "com.squareup.okhttp3:logging-interceptor:$interceptor_version"
+
+
+
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    //shared.lifecycleViewModel
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
