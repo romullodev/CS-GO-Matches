@@ -1,13 +1,6 @@
 package com.fuzy.csgomatches
 
-import android.app.Application
-import timber.log.Timber
+import dagger.hilt.android.HiltAndroidApp
 
-//@HiltAndroidApp
-class MainApplication : Application() {//,  Configuration.Provider{
-
-    override fun onCreate() {
-        super.onCreate()
-        Timber.plant(Timber.DebugTree())
-    }
-}
+@HiltAndroidApp
+class MainApplication : BaseApplication()

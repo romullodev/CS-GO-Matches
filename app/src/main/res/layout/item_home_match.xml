@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewHomeMatches"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_medium"
+        android:layout_marginVertical="@dimen/margin_default"
+        app:cardBackgroundColor="@color/steel_gray"
+        app:cardCornerRadius="@dimen/size_corner_radius_default"
+        app:cardElevation="@dimen/elevation_card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonHomeMatchRunning"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/rounded_rectangle"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_xxxsmall"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent=".2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent=".15"
+                android:text="@string/home_match_status_now"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonHomeMatchOtherStatus"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/rounded_rectangle"
+                android:backgroundTint="@color/scarpa_flow"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_xxxsmall"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent=".2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent=".2"
+                tools:text="Hoje, 21:00" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/shapeableImageViewHomeMatchFirstOpponent"
+                android:layout_width="@dimen/size_image_circle"
+                android:layout_height="@dimen/size_image_circle"
+                android:layout_marginStart="@dimen/margin_huge"
+                android:layout_marginTop="@dimen/margin_xxxlarge"
+                android:layout_marginBottom="@dimen/margin_xxxlarge"
+                android:padding="1dp"
+                android:scaleType="centerInside"
+                app:layout_constraintBottom_toTopOf="@+id/viewHorizontalLine"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/ThemeOverlay.CSGOMatches.TextView.Circle"
+                app:strokeColor="@color/white"
+                app:strokeWidth="1dp"
+                tools:background="@color/white" />
+
+            <TextView
+                android:id="@+id/textViewFirstOpponentName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_xxsmall"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_small"
+                app:layout_constraintEnd_toEndOf="@+id/shapeableImageViewHomeMatchFirstOpponent"
+                app:layout_constraintStart_toStartOf="@+id/shapeableImageViewHomeMatchFirstOpponent"
+                app:layout_constraintTop_toBottomOf="@+id/shapeableImageViewHomeMatchFirstOpponent"
+                tools:text="Team 1" />
+
+            <TextView
+                android:id="@+id/textViewSecondOpponentName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_xxsmall"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_small"
+                app:layout_constraintEnd_toEndOf="@+id/shapeableImageViewHomeMatchSecondOpponent"
+                app:layout_constraintStart_toStartOf="@+id/shapeableImageViewHomeMatchSecondOpponent"
+                app:layout_constraintTop_toBottomOf="@+id/shapeableImageViewHomeMatchSecondOpponent"
+                tools:text="Team 2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_versus"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_small"
+                app:layout_constraintBottom_toBottomOf="@+id/shapeableImageViewHomeMatchSecondOpponent"
+                app:layout_constraintEnd_toStartOf="@+id/shapeableImageViewHomeMatchSecondOpponent"
+                app:layout_constraintStart_toEndOf="@+id/shapeableImageViewHomeMatchFirstOpponent"
+                app:layout_constraintTop_toTopOf="@+id/shapeableImageViewHomeMatchSecondOpponent"
+                app:layout_constraintVertical_bias="0.8" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/shapeableImageViewHomeMatchSecondOpponent"
+                android:layout_width="@dimen/size_image_circle"
+                android:layout_height="@dimen/size_image_circle"
+                android:layout_marginTop="@dimen/margin_xxxlarge"
+                android:layout_marginEnd="@dimen/margin_huge"
+                android:layout_marginBottom="@dimen/margin_xxxlarge"
+                android:padding="1dp"
+                android:scaleType="centerInside"
+                app:layout_constraintBottom_toTopOf="@+id/viewHorizontalLine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/ThemeOverlay.CSGOMatches.TextView.Circle"
+                app:strokeColor="@color/white"
+                app:strokeWidth="1dp"
+                tools:background="@color/white" />
+
+            <View
+                android:id="@+id/viewHorizontalLine"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginBottom="@dimen/margin_xxxsmall"
+                android:background="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/shapeableImageViewHomeMatchLeagueSerie"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/shapeableImageViewHomeMatchLeagueSerie"
+                android:layout_width="@dimen/size_image_circle_small"
+                android:layout_height="@dimen/size_image_circle_small"
+                android:layout_marginStart="@dimen/margin_xsmall"
+                android:layout_marginBottom="@dimen/margin_xxxsmall"
+                android:padding="1dp"
+                android:scaleType="centerInside"
+                app:strokeWidth="0.5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:shapeAppearanceOverlay="@style/ThemeOverlay.CSGOMatches.TextView.Circle"
+                app:strokeColor="@color/white"
+                tools:background="@color/white" />
+
+
+            <TextView
+                android:id="@+id/textViewItemHomeLeagueSerieName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_xxxsmall"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_small"
+                app:layout_constraintBottom_toBottomOf="@+id/shapeableImageViewHomeMatchLeagueSerie"
+                app:layout_constraintStart_toEndOf="@+id/shapeableImageViewHomeMatchLeagueSerie"
+                app:layout_constraintTop_toTopOf="@+id/shapeableImageViewHomeMatchLeagueSerie"
+                app:layout_constraintVertical_bias="0.8"
+                tools:text="League + Serie" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

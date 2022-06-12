@@ -4,8 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/workspace/CSGOMatches/app/src/main/res/drawable/fuzy_icon.xml" value="0.21" />
+        <entry key="..\:/workspace/CSGOMatches/app/src/main/res/drawable/rounded_rectangle.xml" value="0.1865" />
         <entry key="..\:/workspace/CSGOMatches/app/src/main/res/layout/activity_main.xml" value="0.27291666666666664" />
+        <entry key="..\:/workspace/CSGOMatches/app/src/main/res/layout/activity_main_content.xml" value="0.22402736212056434" />
         <entry key="..\:/workspace/CSGOMatches/app/src/main/res/layout/activity_splash_screen.xml" value="0.17361740707162285" />
+        <entry key="..\:/workspace/CSGOMatches/app/src/main/res/layout/dialog_layout.xml" value="0.22402736212056434" />
+        <entry key="..\:/workspace/CSGOMatches/app/src/main/res/layout/dialog_loading_container.xml" value="0.22402736212056434" />
+        <entry key="..\:/workspace/CSGOMatches/app/src/main/res/layout/fragment_home.xml" value="0.2" />
+        <entry key="..\:/workspace/CSGOMatches/app/src/main/res/layout/fragment_match_details.xml" value="0.12090163934426229" />
+        <entry key="..\:/workspace/CSGOMatches/app/src/main/res/layout/item_home_match.xml" value="0.25" />
+        <entry key="..\:/workspace/CSGOMatches/app/src/main/res/layout/item_match_loader.xml" value="0.18194444444444444" />
+        <entry key="..\:/workspace/CSGOMatches/app/src/main/res/layout/layout_all_toolbar.xml" value="0.22" />
       </map>
     </option>
   </component>
