@@ -1,10 +1,16 @@
 package com.fuzy.csgomatches.util
 
+import android.view.View
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.fuzy.csgomatches.domain.entities.*
 import com.fuzy.csgomatches.domain.errors.AppErrors
 import com.fuzy.csgomatches.infra.model.*
 import com.fuzy.csgomatches.util.GlobalConstants.Companion.NO_IMAGE
 import com.fuzy.csgomatches.util.GlobalConstants.Companion.NO_NAME
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 fun List<PlayerResponse>.toPlayerDomain(): List<Player> = map {
@@ -54,7 +60,48 @@ fun List<MatchResponse>.toMatchDomain(): List<Match> = map {
 }
 
 fun MatchResponse.toMatchDomain() = Match(
+    id = id ?: throw AppErrors.MatchWithNoId(),
     league = league?.toLeagueDomain() ?: throw AppErrors.MatchWithNoLeague(),
     serie = serie?.toSerieDomain() ?: throw AppErrors.MatchWithNoSerie(),
-    opponents = opponents?.toOpponentDomain() ?: throw AppErrors.MatchWithNoOpponent()
+    opponents = opponents?.toOpponentDomain() ?: throw AppErrors.MatchWithNoOpponent(),
+    status = getMatchStatus(status),
+    scheduleAt = scheduled_at ?: ""
 )
+
+fun getMatchStatus(status: String?): MatchStatusEnum {
+    status.let {
+        return when (it?.uppercase()?.trim()) {
+            MatchStatusEnum.RUNNING.value -> MatchStatusEnum.RUNNING
+            MatchStatusEnum.CANCELED.value -> MatchStatusEnum.CANCELED
+            MatchStatusEnum.NOT_STARTED.value -> MatchStatusEnum.NOT_STARTED
+            MatchStatusEnum.FINISHED.value -> MatchStatusEnum.FINISHED
+            else -> MatchStatusEnum.NO_STATUS
+        }
+    }
+}
+
+fun View.setVisibleOrGone(isVisible: Boolean){
+    visibility = if(isVisible) View.VISIBLE else View.GONE
+}
+
+fun Fragment.showToast(msg: String, duration: Int = Toast.LENGTH_SHORT){
+    Toast.makeText(requireContext(), msg, duration).show()
+}
+
+fun String?.formatTime(): String = this?.run {
+    val originalFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+    val date: Date? = originalFormat.parse(this)
+
+    val myCal: Calendar = GregorianCalendar()
+    myCal.time = date!!
+
+    "Week: ${myCal[Calendar.DAY_OF_WEEK]} Day: ${myCal[Calendar.DAY_OF_MONTH]} Month: ${myCal[Calendar.MONTH] + 1} Year: ${myCal[Calendar.YEAR]} Hour: ${myCal[Calendar.HOUR]} Minute: ${myCal[Calendar.MINUTE]}"
+} ?: ""
+
+//    fun getFormattedMatchScheduling(scheduleAt: String): String {
+//        return
+//
+//
+////            val sourceFormat = SimpleDateFormat("dd/MM/yyyy' 'HH:mm", Locale.getDefault())
+////            val parsed: Date? = sourceFormat.parse(scheduleAt)
+////            parsed.

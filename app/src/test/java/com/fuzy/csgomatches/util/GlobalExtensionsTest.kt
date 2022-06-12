@@ -13,6 +13,13 @@ import org.junit.Test
 class GlobalExtensionsTest {
 
     @Test
+    fun `convert time based on local timezone`() {
+
+        assertEquals("11/06/2022 19:00", "2022-06-11T19:00:00Z".formatTime())
+    }
+
+
+    @Test
     fun `convert PlayerResponse to internal Player`() {
         val firstName = "Romulo"
         val lastName = "Silva"
@@ -56,13 +63,22 @@ class GlobalExtensionsTest {
     @Test
     fun `convert MatchResponse to Match`() {
         val matchResponse = MatchResponse(
+            0,
             TestUtil.getFakeLeagueResponse(),
             TestUtil.getFakeSerieResponse(),
             listOf(
                 TestUtil.getFakeOpponentResponse(),
                 TestUtil.getFakeOpponentResponse()
-            )
+            ),
+            status = null,
+            scheduled_at = null
         )
+
+        try {
+            matchResponse.copy(id = null).toMatchDomain()
+        }catch (e: Exception){
+            assert(e is AppErrors.MatchWithNoId)
+        }
         try {
             matchResponse.copy(league = null).toMatchDomain()
         }catch (e: Exception){

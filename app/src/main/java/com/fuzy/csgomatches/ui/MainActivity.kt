@@ -1,10 +1,11 @@
 package com.fuzy.csgomatches.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.fuzy.csgomatches.R
+import androidx.appcompat.app.AppCompatActivity
 import com.fuzy.csgomatches.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null

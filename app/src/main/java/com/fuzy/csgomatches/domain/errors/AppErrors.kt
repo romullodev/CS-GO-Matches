@@ -18,16 +18,20 @@ class AppErrors {
         override val resourceMsg: Int = R.string.league_with_no_id
     }
 
+    class MatchWithNoId : GenericError() {
+        override val resourceMsg: Int = R.string.match_with_no_id
+    }
+
     class MatchWithNoLeague : GenericError() {
-        override val resourceMsg: Int = R.string.match_with_league
+        override val resourceMsg: Int = R.string.match_with_no_league
     }
 
     class MatchWithNoSerie : GenericError() {
-        override val resourceMsg: Int = R.string.match_with_serie
+        override val resourceMsg: Int = R.string.match_with_no_serie
     }
 
     class MatchWithNoOpponent : GenericError() {
-        override val resourceMsg: Int = R.string.match_with_opponent
+        override val resourceMsg: Int = R.string.match_with_no_opponent
     }
 
     class MoreThanOneOpponentFounded : GenericError() {
