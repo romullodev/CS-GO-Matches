@@ -33,13 +33,13 @@ Exibe os detalhes da partida em questão, com fotos, nomes e nickname dos jogado
 ## Screeshots
 
 <p align="center">
-  <img width="320" height="568" src=img/SplashScreen.jpeg>
+  <img width="362" height="784" src=img/SplashScreen.jpeg>
 </p>
 
 <p align="center">
-  <img width="320" height="568" src=img/HomeScreen.jpeg>
+  <img width="362" height="784" src=img/HomeScreen.jpeg>
 </p>
 
 <p align="center">
-  <img width="320" height="568" src=img/DetailsScreen.jpeg>
+  <img width="362" height="784" src=img/DetailsScreen.jpeg>
 </p>
