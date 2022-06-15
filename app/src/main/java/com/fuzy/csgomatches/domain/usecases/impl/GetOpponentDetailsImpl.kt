@@ -7,6 +7,6 @@ import javax.inject.Inject
 class GetOpponentDetailsImpl @Inject constructor(
     private val repository: Repository
 ) : GetOpponentDetails {
-    override suspend fun invoke(slugOpponent: String) =
-        repository.getOpponentDetails(slugOpponent)
+    override suspend fun invoke(id: Int) =
+        repository.getOpponentDetails(id)
 }

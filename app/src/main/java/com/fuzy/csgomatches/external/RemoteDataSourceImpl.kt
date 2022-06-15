@@ -34,9 +34,9 @@ class RemoteDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun getOpponentDetails(slugOpponent: String) = withContext(dispatcher) {
+    override suspend fun getOpponentDetails(id: Int) = withContext(dispatcher) {
         try {
-            apiService.getOpponentDetails(slugOpponent)
+            apiService.getOpponentDetails(id)
                 .takeIf { it.size == 1 }?.let {
                     return@withContext it.toTeamDomain().first()
                 }

@@ -37,8 +37,6 @@ LoadingDialogView @JvmOverloads constructor(
         set(value) {
             field = value
             if (value == VISIBLE) {
-                dialog.findViewById<MaterialTextView>(R.id.customProgressTitle).text =
-                    context.getString(bindingData?.loadingMessage?.value ?: R.string.loading_dialog_message_please_wait )
                 dialog.show()
             } else {
                 dialog.dismiss()

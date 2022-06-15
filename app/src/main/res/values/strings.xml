@@ -13,6 +13,11 @@
 
     <!-- Loading Messages -->
     <string name="loading_dialog_message_please_wait">Por favor, aguarde …</string>
+    <string name="loading_dialog_message_search_details">Buscando detalhes …</string>
+
+    <!-- Alert Messages -->
+    <string name="all_ok_button">OK</string>
+    <string name="all_attention_title">Atenção</string>
 
     <!-- Home Fragment -->
     <string name="home_app_bar_title">Partidas</string>
@@ -22,7 +27,15 @@
     <string name="home_match_status_canceled">Cancelado</string>
     <string name="home_match_status_no_info">Sem Status</string>
     <string name="home_match_status_now">Agora</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Common -->
+    <string name="all_day_of_week_sunday">Dom</string>
+    <string name="all_day_of_week_monday">Seg</string>
+    <string name="all_day_of_week_tuesday">Ter</string>
+    <string name="all_day_of_week_wednesday">Qua</string>
+    <string name="all_day_of_week_thursday">Qui</string>
+    <string name="all_day_of_week_friday">Sex</string>
+    <string name="all_day_of_week_saturday">Sab</string>
+    <string name="all_tday">Hoje</string>
 
 </resources>

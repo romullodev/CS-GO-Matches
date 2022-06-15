@@ -14,8 +14,8 @@ class GetOpponentDetailsImplTest: BaseTest() {
 
     @Test
     fun `get opponent details successfully`(): Unit = runBlocking {
-        val slug = "websterz"
-        val result: Team = getOpponentDetailsUseCase(slug)
-        Assert.assertEquals(result.slug, slug)
+        val id = 125859
+        val result: Team = getOpponentDetailsUseCase(id)
+        Assert.assertEquals(result.id, id)
     }
 }

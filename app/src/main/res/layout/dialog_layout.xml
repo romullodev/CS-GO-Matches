@@ -23,19 +23,5 @@
             app:trackColor="@color/cinder"
             app:trackThickness="@dimen/size_progress_tickness" />
 
-        <!--  this title is update internal from the Custom View -->
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/customProgressTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_top_default"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textSize="@dimen/textsize_xxlarge"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/customProgressBar"
-            tools:text="Por Favor, aguarde..." />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

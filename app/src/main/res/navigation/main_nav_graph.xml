@@ -8,6 +8,17 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.fuzy.csgomatches.ui.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_matchDetailsFragment"
+            app:destination="@id/matchDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/matchDetailsFragment"
+        android:name="com.fuzy.csgomatches.ui.details.MatchDetailsFragment"
+        tools:layout="@layout/fragment_match_details">
+        <argument
+            android:name="matchDetail"
+            app:argType="com.fuzy.csgomatches.domain.entities.Match" />
+    </fragment>
 </navigation>

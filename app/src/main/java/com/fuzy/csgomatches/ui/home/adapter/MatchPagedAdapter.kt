@@ -14,8 +14,7 @@ import com.fuzy.csgomatches.domain.entities.MatchStatusEnum
 import com.fuzy.csgomatches.ui.loading.visibleOrGone
 import com.fuzy.csgomatches.util.GlobalConstants.Companion.FIRST_OPPONENT
 import com.fuzy.csgomatches.util.GlobalConstants.Companion.SECOND_OPPONENT
-import com.fuzy.csgomatches.util.formatTime
-import java.text.SimpleDateFormat
+import com.fuzy.csgomatches.util.formatTimeFromIso8601
 import java.util.*
 
 private typealias MatchClickListener = (Match) -> Unit
@@ -49,51 +48,52 @@ class MatchPagedAdapter(
 
         fun bindView(match: Match, action: MatchClickListener) {
             binding.run {
-                binding.buttonHomeMatchRunning.visibleOrGone(match.status == MatchStatusEnum.RUNNING)
-                binding.buttonHomeMatchOtherStatus.visibleOrGone(match.status != MatchStatusEnum.RUNNING)
+                buttonHomeMatchRunning.visibleOrGone(match.status == MatchStatusEnum.RUNNING)
+                buttonHomeMatchOtherStatus.visibleOrGone(match.status != MatchStatusEnum.RUNNING)
                 when(match.status){
                     MatchStatusEnum.CANCELED -> {
-                        binding.buttonHomeMatchOtherStatus.text = binding.root.context.getString(R.string.home_match_status_canceled)
+                        buttonHomeMatchOtherStatus.text = root.context.getString(R.string.home_match_status_canceled)
                     }
                     MatchStatusEnum.NO_STATUS -> {
-                        binding.buttonHomeMatchOtherStatus.text = binding.root.context.getString(R.string.home_match_status_no_info)
+                        buttonHomeMatchOtherStatus.text = root.context.getString(R.string.home_match_status_no_info)
                     }
                     MatchStatusEnum.RUNNING -> {}
                     MatchStatusEnum.NOT_STARTED -> {
-                        binding.buttonHomeMatchOtherStatus.text = match.scheduleAt.formatTime()
+                        buttonHomeMatchOtherStatus.text = match.scheduleAt.formatTimeFromIso8601(root.context)
                     }
                     MatchStatusEnum.FINISHED -> {
-                        binding.buttonHomeMatchOtherStatus.text = binding.root.context.getString(R.string.home_match_status_finish)
+                        buttonHomeMatchOtherStatus.text = root.context.getString(R.string.home_match_status_finish)
                     }
                 }
                 cardViewHomeMatches.setOnClickListener {
                     action(match)
                 }
-                textViewFirstOpponentName.text = match.opponents[FIRST_OPPONENT].opponent.name
-                textViewSecondOpponentName.text = match.opponents[SECOND_OPPONENT].opponent.name
+                layoutVersusTeams.textViewFirstOpponentName.text = match.opponents[FIRST_OPPONENT].opponent.name
+                layoutVersusTeams.textViewSecondOpponentName.text = match.opponents[SECOND_OPPONENT].opponent.name
                 "${match.league.name} | ${match.serie.name}".let {
                     textViewItemHomeLeagueSerieName.text = it
                 }
+
+                RequestOptions()
+                    .placeholder(R.drawable.cs_go_placeholder)
+                    .error(R.drawable.cs_go_placeholder)
+                    .dontAnimate().also {
+                        Glide.with(root.context)
+                            .load(match.opponents[FIRST_OPPONENT].opponent.image)
+                            .apply(it)
+                            .into(layoutVersusTeams.shapeableImageViewVersusFirstOpponent)
+
+                        Glide.with(root.context)
+                            .load(match.opponents[SECOND_OPPONENT].opponent.image)
+                            .apply(it)
+                            .into(layoutVersusTeams.shapeableImageViewVersusSecondOpponent)
+
+                        Glide.with(root.context)
+                            .load(match.league.image)
+                            .apply(it)
+                            .into(shapeableImageViewHomeMatchLeagueSerie)
+                    }
             }
-            RequestOptions()
-                .placeholder(R.drawable.fuzy_icon)
-                .error(R.drawable.fuzy_icon)
-                .dontAnimate().also {
-                    Glide.with(binding.root.context)
-                        .load(match.opponents[FIRST_OPPONENT].opponent.image)
-                        .apply(it)
-                        .into(binding.shapeableImageViewHomeMatchFirstOpponent)
-
-                    Glide.with(binding.root.context)
-                        .load(match.opponents[SECOND_OPPONENT].opponent.image)
-                        .apply(it)
-                        .into(binding.shapeableImageViewHomeMatchSecondOpponent)
-
-                    Glide.with(binding.root.context)
-                        .load(match.league.image)
-                        .apply(it)
-                        .into(binding.shapeableImageViewHomeMatchLeagueSerie)
-                }
         }
 
         companion object {

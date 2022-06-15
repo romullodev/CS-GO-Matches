@@ -8,6 +8,6 @@ import com.fuzy.csgomatches.domain.entities.Team
 
 interface RemoteDataSource {
     suspend fun getMatches(): List<Match>
-    suspend fun getOpponentDetails(slugOpponent: String): Team
+    suspend fun getOpponentDetails(id: Int): Team
     fun getMatchesObservable(): LiveData<PagingData<Match>>
 }

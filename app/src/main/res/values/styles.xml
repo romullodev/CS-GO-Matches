@@ -1,11 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="ThemeOverlay.CSGOMatches.TextView.Circle" parent="">
+    <style name="ThemeOverlay.CSGOMatches.ImageView.Circle" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
 
     <style name="ThemeOverlay.PopupTheme" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
         <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="ThemeOverlay.CSGOMatches.ImageView.RoundedRectangle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">15%</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.LeftRoundRectangle" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.LeftRounded</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.LeftRounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeBottomRight">@dimen/size_corner_radius_small</item>
+        <item name="cornerSizeTopRight">@dimen/size_corner_radius_small</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.RightRoundRectangle" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.RightRounded</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.RightRounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">@dimen/size_corner_radius_small</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeBottomLeft">@dimen/size_corner_radius_small</item>
+    </style>
+
+    <style name="ThemeOverlay.CSGOMatches.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="android:backgroundDimAmount">0.8</item>
     </style>
 </resources>

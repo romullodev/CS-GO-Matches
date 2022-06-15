@@ -17,7 +17,7 @@ class MatchPagingSource(private val apiService: ApiService) :
         return try {
             val response = apiService.getPagedMatches(page = page, perPage = params.loadSize)
             LoadResult.Page(
-                response.toMatchDomain().filter { it.opponents.size == 2 },
+                response.toMatchDomain().filter { it.opponents.size == 2 && it.status != MatchStatusEnum.CANCELED},
                 prevKey = if (page == DEFAULT_PAGE_INDEX) null else page - 1,
                 nextKey = if (response.isEmpty()) null else page + 1
             )

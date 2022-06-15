@@ -10,14 +10,8 @@ import com.fuzy.csgomatches.util.GlobalConstants.Companion.NO_NAME
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 
+
 class GlobalExtensionsTest {
-
-    @Test
-    fun `convert time based on local timezone`() {
-
-        assertEquals("11/06/2022 19:00", "2022-06-11T19:00:00Z".formatTime())
-    }
-
 
     @Test
     fun `convert PlayerResponse to internal Player`() {

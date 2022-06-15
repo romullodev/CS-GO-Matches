@@ -1,16 +1,32 @@
 package com.fuzy.csgomatches.util
 
+import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
+import com.fuzy.csgomatches.R
+import com.fuzy.csgomatches.databinding.LayoutAllToolbarBinding
+import com.fuzy.csgomatches.databinding.ViewAllInfoBinding
 import com.fuzy.csgomatches.domain.entities.*
 import com.fuzy.csgomatches.domain.errors.AppErrors
 import com.fuzy.csgomatches.infra.model.*
+import com.fuzy.csgomatches.util.GlobalConstants.Companion.CUSTOM_FORMAT
+import com.fuzy.csgomatches.util.GlobalConstants.Companion.ISO_8601_FORMAT
 import com.fuzy.csgomatches.util.GlobalConstants.Companion.NO_IMAGE
 import com.fuzy.csgomatches.util.GlobalConstants.Companion.NO_NAME
-import java.text.DateFormat
+import com.fuzy.csgomatches.util.GlobalConstants.Companion.ONE_DAY_IN_MILLISECONDS
+import com.fuzy.csgomatches.util.GlobalConstants.Companion.ONE_WEEK_IN_MILLISECONDS
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 
 fun List<PlayerResponse>.toPlayerDomain(): List<Player> = map {
@@ -88,20 +104,75 @@ fun Fragment.showToast(msg: String, duration: Int = Toast.LENGTH_SHORT){
     Toast.makeText(requireContext(), msg, duration).show()
 }
 
-fun String?.formatTime(): String = this?.run {
-    val originalFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
-    val date: Date? = originalFormat.parse(this)
+fun String?.formatTimeFromIso8601(ctx: Context): String = this?.run {
+    val originalFormatter = SimpleDateFormat(ISO_8601_FORMAT, Locale.getDefault())
+    originalFormatter.timeZone = TimeZone.getTimeZone("UTC")
+    val targetFormatter = SimpleDateFormat(CUSTOM_FORMAT, Locale.getDefault())
+    val date: Date? = originalFormatter.parse(this)
+    // Finding the absolute difference between
+    // the two dates.time (in milli seconds)
+    val difference = kotlin.math.abs(date!!.time - Calendar.getInstance().timeInMillis)
 
-    val myCal: Calendar = GregorianCalendar()
-    myCal.time = date!!
-
-    "Week: ${myCal[Calendar.DAY_OF_WEEK]} Day: ${myCal[Calendar.DAY_OF_MONTH]} Month: ${myCal[Calendar.MONTH] + 1} Year: ${myCal[Calendar.YEAR]} Hour: ${myCal[Calendar.HOUR]} Minute: ${myCal[Calendar.MINUTE]}"
+    // true if the match will occur after one week
+    if(difference > ONE_WEEK_IN_MILLISECONDS){
+        targetFormatter.format(date)
+    } else {
+       getFormattedDate(
+           GregorianCalendar().also { it.time =  date },
+           ctx,
+           today = difference < ONE_DAY_IN_MILLISECONDS
+       )
+    }
 } ?: ""
 
-//    fun getFormattedMatchScheduling(scheduleAt: String): String {
-//        return
-//
-//
-////            val sourceFormat = SimpleDateFormat("dd/MM/yyyy' 'HH:mm", Locale.getDefault())
-////            val parsed: Date? = sourceFormat.parse(scheduleAt)
-////            parsed.
+fun getFormattedDate(cal: Calendar, ctx: Context, today: Boolean = false): String {
+    val moment =
+        if(today)
+            ctx.getString(R.string.all_tday)
+        else
+            getWeekName(cal.get(Calendar.DAY_OF_WEEK), ctx)
+
+    val hour = cal.get(Calendar.HOUR_OF_DAY)
+    val min = cal.get(Calendar.MINUTE)
+    return "${moment}, ${ if(hour > 9) hour else "0$hour" }:${if(min > 9) min else "0$min"}"
+}
+
+fun getWeekName(dayOfWeek: Int, ctx: Context) =
+    when(dayOfWeek) {
+        Calendar.SUNDAY -> ctx.getString(R.string.all_day_of_week_sunday)
+        Calendar.MONDAY -> ctx.getString(R.string.all_day_of_week_monday)
+        Calendar.TUESDAY -> ctx.getString(R.string.all_day_of_week_tuesday)
+        Calendar.WEDNESDAY -> ctx.getString(R.string.all_day_of_week_wednesday)
+        Calendar.THURSDAY -> ctx.getString(R.string.all_day_of_week_thursday)
+        Calendar.FRIDAY -> ctx.getString(R.string.all_day_of_week_friday)
+        Calendar.SATURDAY -> ctx.getString(R.string.all_day_of_week_saturday)
+        else -> String()
+    }
+
+fun Fragment.showInfoAlertDialog(
+    message: String,
+    actionPos: Runnable? = null
+) {
+    val dialog = MaterialAlertDialogBuilder(requireContext(), R.style.ThemeOverlay_CSGOMatches_MaterialAlertDialog).create()
+    val binding = ViewAllInfoBinding.inflate(LayoutInflater.from(context), null, false)
+    binding.run {
+        textViewAllMsg.text = message
+        buttonAllInfoOk.setOnClickListener{
+            actionPos?.run()
+            dialog.dismiss()
+        }
+        dialog.setView(root)
+    }
+    dialog.setCancelable(false)
+    dialog.show()
+}
+
+fun LayoutAllToolbarBinding.setupToolbarWithNavController(
+    frg: Fragment
+){
+    frg.findNavController().let { navController ->
+        AppBarConfiguration(navController.graph).let {
+            this.toolbar.setupWithNavController(navController, it)
+        }
+    }
+}

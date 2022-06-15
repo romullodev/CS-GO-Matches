@@ -10,8 +10,8 @@ class RepositoryImpl @Inject constructor(
 ): Repository {
     override suspend fun getMatches() = remoteDataSource.getMatches()
 
-    override suspend fun getOpponentDetails(slugOpponent: String) =
-        remoteDataSource.getOpponentDetails(slugOpponent)
+    override suspend fun getOpponentDetails(id: Int) =
+        remoteDataSource.getOpponentDetails(id)
 
     override fun getMatchesObservable() =
         remoteDataSource.getMatchesObservable()
