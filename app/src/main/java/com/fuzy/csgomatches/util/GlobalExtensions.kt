@@ -107,13 +107,13 @@ fun String?.formatTimeFromIso8601(ctx: Context): String = this?.run {
     val date: Date? = originalFormatter.parse(this)
     // Finding the absolute difference between
     // the two dates.time (in milli seconds)
-    val difference = date!!.time - Calendar.getInstance().timeInMillis
+    val difference = date!!.time - AppUtil.timeUtil.getCalendar().timeInMillis
 
     if (isMatchAfterOneWeek(difference)) {
         targetFormatter.format(date)
     } else {
         getFormattedDate(
-            GregorianCalendar().also { it.time = date },
+            AppUtil.timeUtil.getCalendar().also { it.time = date },
             ctx,
             today = isMatchToday(difference)
         )
@@ -121,14 +121,14 @@ fun String?.formatTimeFromIso8601(ctx: Context): String = this?.run {
 } ?: String()
 
 private fun isMatchToday(difference: Long) =
-    Calendar.getInstance().let {
+    AppUtil.timeUtil.getCalendar().let {
         it.get(Calendar.HOUR_OF_DAY) * 60 * 60 * 1000 +
                 difference < ONE_DAY_IN_MILLISECONDS
     }
 
-private fun isMatchAfterOneWeek(difference: Long) = Calendar.getInstance().let {
+private fun isMatchAfterOneWeek(difference: Long) = AppUtil.timeUtil.getCalendar().let {
     it.get(Calendar.HOUR_OF_DAY) * 60 * 60 * 1000 +
-            difference > ONE_WEEK_IN_MILLISECONDS
+            difference >= ONE_WEEK_IN_MILLISECONDS
 }
 
 fun getFormattedDate(cal: Calendar, ctx: Context, today: Boolean = false): String {
