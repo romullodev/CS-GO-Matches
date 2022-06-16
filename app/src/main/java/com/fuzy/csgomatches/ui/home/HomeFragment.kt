@@ -5,22 +5,19 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.adapters.TextViewBindingAdapter.setTextSize
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
-import androidx.paging.PagingData
 import com.fuzy.csgomatches.R
 import com.fuzy.csgomatches.databinding.FragmentHomeBinding
 import com.fuzy.csgomatches.ui.home.adapter.LoaderMatchStateAdapter
 import com.fuzy.csgomatches.ui.home.adapter.MatchPagedAdapter
 import com.fuzy.csgomatches.util.BaseFragment
 import com.fuzy.csgomatches.util.showInfoAlertDialog
-import com.fuzy.csgomatches.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.security.interfaces.RSAKey
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment() {
@@ -28,7 +25,6 @@ class HomeFragment : BaseFragment() {
     private val viewModel: HomeViewModel by activityViewModels()
     private lateinit var adapter: MatchPagedAdapter
     private lateinit var stateAdapter: LoaderMatchStateAdapter
-    private var burnFirstLoading = false
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -65,11 +61,19 @@ class HomeFragment : BaseFragment() {
         }
 
         adapter.addLoadStateListener { loadState ->
-            if (loadState.source.refresh is LoadState.NotLoading && !burnFirstLoading) {
+            if (loadState.source.refresh is LoadState.NotLoading) {
                 viewModel.hideDialog()
             } else {
-                if(loadState.source.refresh is LoadState.Loading && !burnFirstLoading){
-                    viewModel.showDialog()
+                if(loadState.source.refresh is LoadState.Error){
+                    viewModel.hideDialog()
+                    showInfoAlertDialog(
+                        getString(R.string.an_error_occurred_try_again),
+                        getString(R.string.try_again)
+                    ) { adapter.retry() }
+                }else {
+                    if(loadState.source.refresh is LoadState.Loading){
+                        viewModel.showDialog()
+                    }
                 }
             }
         }

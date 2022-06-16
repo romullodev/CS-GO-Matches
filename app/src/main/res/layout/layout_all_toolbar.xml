@@ -16,30 +16,19 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            app:buttonGravity="center_vertical"
-            app:contentInsetStart="0dp"
             app:popupTheme="@style/ThemeOverlay.PopupTheme"
-            app:contentInsetStartWithNavigation="0dp"
-            android:layout_height="match_parent">
+            android:layout_height="@dimen/height_toolbar"
+            android:minHeight="@dimen/height_toolbar">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/textViewToolbarTitle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_medium"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:ellipsize="end"
-                    android:layout_marginEnd="@dimen/margin_medium"
-                    tools:text="tool bar title" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textViewToolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="start tool bar title" />
 
         </com.google.android.material.appbar.MaterialToolbar>
 
