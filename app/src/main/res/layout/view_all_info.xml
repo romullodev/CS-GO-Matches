@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/steel_gray">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewAllIcon"
+            android:layout_width="@dimen/size_icon_medium"
+            android:layout_height="@dimen/size_icon_medium"
+            android:layout_marginEnd="@dimen/margin_right_default"
+            android:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/textView_all_title"
+            app:layout_constraintEnd_toStartOf="@+id/textView_all_title"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintTop_toTopOf="@+id/textView_all_title"
+            app:srcCompat="@drawable/ic_info" />
+
+        <TextView
+            android:id="@+id/textView_all_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_default"
+            android:layout_marginTop="@dimen/margin_top_default"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_xxlarge"
+            android:textStyle="bold"
+            android:text="@string/all_attention_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/textView_all_msg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            android:gravity="center"
+            android:padding="@dimen/margin_default"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_all_title"
+            tools:text="mensagem" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_all_info_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:text="@string/all_ok_button"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_all_msg" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

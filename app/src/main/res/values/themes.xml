@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.CSGOMatches" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/cinder</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/pomegranate</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" >@color/cinder</item>
+        <!-- Customize your theme here. -->
+    </style>
+</resources>

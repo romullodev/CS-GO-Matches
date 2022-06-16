@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">CS GO Matches</string>
+
+    <!-- Errors -->
+    <string name="an_error_occurred_try_again">Ocorreu um erro! Por favor, tente novamente.</string>
+    <string name="team_with_no_id">Time sem slug</string>
+    <string name="league_with_no_id">Liga sem id</string>
+    <string name="match_with_no_league">Partida sem liga</string>
+    <string name="match_with_no_id">Partida sem id</string>
+    <string name="match_with_no_serie">Partida sem série</string>
+    <string name="match_with_no_opponent">Partida sem oponentes</string>
+    <string name="more_than_one_opponent_founded">Mais de um oponente encontrado</string>
+
+    <!-- Loading Messages -->
+    <string name="loading_dialog_message_please_wait">Por favor, aguarde …</string>
+    <string name="loading_dialog_message_search_details">Buscando detalhes …</string>
+
+    <!-- Alert Messages -->
+    <string name="all_ok_button">OK</string>
+    <string name="all_attention_title">Atenção</string>
+    <string name="try_again">Tentar novamente</string>
+
+    <!-- Home Fragment -->
+    <string name="home_app_bar_title">Partidas</string>
+    <string name="home_versus">vs</string>
+    <string name="home_error_update">Atualizar</string>
+    <string name="home_match_status_finish">Encerrado</string>
+    <string name="home_match_status_canceled">Cancelado</string>
+    <string name="home_match_status_no_info">Sem Status</string>
+    <string name="home_match_status_now">Agora</string>
+
+    <!-- Common -->
+    <string name="all_day_of_week_sunday">Dom</string>
+    <string name="all_day_of_week_monday">Seg</string>
+    <string name="all_day_of_week_tuesday">Ter</string>
+    <string name="all_day_of_week_wednesday">Qua</string>
+    <string name="all_day_of_week_thursday">Qui</string>
+    <string name="all_day_of_week_friday">Sex</string>
+    <string name="all_day_of_week_saturday">Sab</string>
+    <string name="all_tday">Hoje</string>
+
+</resources>

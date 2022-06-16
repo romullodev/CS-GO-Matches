@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="pomegranate">#EB3220</color>
+    <color name="cinder">#161621</color> <!-- background color  -->
+    <color name="steel_gray">#272639</color> <!-- card color  -->
+    <color name="a_60_black">#99000000</color>
+    <color name="silver">#C4C4C4</color>
+    <color name="scarpa_flow">#515060</color>
+    <color name="storm_gray">#6C6B7E</color>
+
+</resources>

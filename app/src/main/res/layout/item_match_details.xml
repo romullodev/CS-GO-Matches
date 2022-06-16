@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cinder">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/shapeableImageViewMatchDetailsPlayerFirstPlayer"
+            android:layout_width="@dimen/size_image_rounded_rectangle"
+            android:layout_height="@dimen/size_image_rounded_rectangle"
+            android:layout_marginEnd="@dimen/margin_xxsmall"
+            android:elevation="@dimen/elevation_imageView"
+            android:padding="1dp"
+            android:scaleType="centerInside"
+            android:translationY="-3dp"
+            app:layout_constraintEnd_toEndOf="@+id/cardViewHomeMatchesFirst"
+            app:layout_constraintTop_toTopOf="@+id/cardViewHomeMatchesFirst"
+            app:shapeAppearanceOverlay="@style/ThemeOverlay.CSGOMatches.ImageView.RoundedRectangle"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp"
+            tools:background="@color/white" />
+
+        <TextView
+            android:id="@+id/textViewFirstNickName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/elevation_textView"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_small"
+            app:layout_constraintBottom_toTopOf="@+id/textViewFirstFullNamePlayer"
+            app:layout_constraintEnd_toEndOf="@+id/textViewFirstFullNamePlayer"
+            tools:text="NickName" />
+
+        <TextView
+            android:id="@+id/textViewFirstFullNamePlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_xsmall"
+            android:elevation="@dimen/elevation_textView"
+            android:gravity="end"
+            android:textColor="@color/storm_gray"
+            android:textSize="@dimen/textsize_xsmall"
+            app:layout_constraintBottom_toBottomOf="@+id/shapeableImageViewMatchDetailsPlayerFirstPlayer"
+            app:layout_constraintEnd_toStartOf="@+id/shapeableImageViewMatchDetailsPlayerFirstPlayer"
+            tools:text="Player Name" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardViewHomeMatchesFirst"
+            style="@style/ShapeAppearanceOverlay.LeftRoundRectangle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_card_view_player"
+            android:layout_marginTop="@dimen/margin_xsmall"
+            app:cardBackgroundColor="@color/steel_gray"
+            app:cardElevation="@dimen/elevation_card"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent=".49" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardViewHomeMatchesSecond"
+            style="@style/ShapeAppearanceOverlay.RightRoundRectangle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_card_view_player"
+            android:layout_marginTop="@dimen/margin_xsmall"
+            app:cardBackgroundColor="@color/steel_gray"
+            app:cardElevation="@dimen/elevation_card"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent=".49" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/shapeableImageViewMatchDetailsPlayerSecondPlayer"
+            android:layout_width="@dimen/size_image_rounded_rectangle"
+            android:layout_height="@dimen/size_image_rounded_rectangle"
+            android:layout_marginEnd="@dimen/margin_xxsmall"
+            android:elevation="@dimen/elevation_imageView"
+            android:padding="1dp"
+            android:scaleType="centerInside"
+            android:translationY="-3dp"
+            app:layout_constraintStart_toStartOf="@+id/cardViewHomeMatchesSecond"
+            app:layout_constraintTop_toTopOf="@+id/cardViewHomeMatchesSecond"
+            app:shapeAppearanceOverlay="@style/ThemeOverlay.CSGOMatches.ImageView.RoundedRectangle"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp"
+            tools:background="@color/white" />
+
+        <TextView
+            android:id="@+id/textViewSecondNickName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/elevation_textView"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_small"
+            app:layout_constraintBottom_toTopOf="@+id/textViewSecondFullNamePlayer"
+            app:layout_constraintStart_toStartOf="@+id/textViewSecondFullNamePlayer"
+            tools:text="NickName" />
+
+        <TextView
+            android:id="@+id/textViewSecondFullNamePlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_xsmall"
+            android:elevation="@dimen/elevation_textView"
+            android:gravity="end"
+            android:textColor="@color/storm_gray"
+            android:textSize="@dimen/textsize_xsmall"
+            app:layout_constraintBottom_toBottomOf="@+id/shapeableImageViewMatchDetailsPlayerSecondPlayer"
+            app:layout_constraintStart_toEndOf="@+id/shapeableImageViewMatchDetailsPlayerSecondPlayer"
+            tools:text="Player Name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
