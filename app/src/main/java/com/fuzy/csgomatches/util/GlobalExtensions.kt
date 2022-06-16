@@ -96,12 +96,8 @@ fun getMatchStatus(status: String?): MatchStatusEnum {
     }
 }
 
-fun View.setVisibleOrGone(isVisible: Boolean){
-    visibility = if(isVisible) View.VISIBLE else View.GONE
-}
-
-fun Fragment.showToast(msg: String, duration: Int = Toast.LENGTH_SHORT){
-    Toast.makeText(requireContext(), msg, duration).show()
+fun View.setVisibleOrGone(isVisible: Boolean) {
+    visibility = if (isVisible) View.VISIBLE else View.GONE
 }
 
 fun String?.formatTimeFromIso8601(ctx: Context): String = this?.run {
@@ -111,34 +107,44 @@ fun String?.formatTimeFromIso8601(ctx: Context): String = this?.run {
     val date: Date? = originalFormatter.parse(this)
     // Finding the absolute difference between
     // the two dates.time (in milli seconds)
-    val difference = kotlin.math.abs(date!!.time - Calendar.getInstance().timeInMillis)
+    val difference = date!!.time - Calendar.getInstance().timeInMillis
 
-    // true if the match will occur after one week
-    if(difference > ONE_WEEK_IN_MILLISECONDS){
+    if (isMatchAfterOneWeek(difference)) {
         targetFormatter.format(date)
     } else {
-       getFormattedDate(
-           GregorianCalendar().also { it.time =  date },
-           ctx,
-           today = difference < ONE_DAY_IN_MILLISECONDS
-       )
+        getFormattedDate(
+            GregorianCalendar().also { it.time = date },
+            ctx,
+            today = isMatchToday(difference)
+        )
     }
-} ?: ""
+} ?: String()
+
+private fun isMatchToday(difference: Long) =
+    Calendar.getInstance().let {
+        it.get(Calendar.HOUR_OF_DAY) * 60 * 60 * 1000 +
+                difference < ONE_DAY_IN_MILLISECONDS
+    }
+
+private fun isMatchAfterOneWeek(difference: Long) = Calendar.getInstance().let {
+    it.get(Calendar.HOUR_OF_DAY) * 60 * 60 * 1000 +
+            difference > ONE_WEEK_IN_MILLISECONDS
+}
 
 fun getFormattedDate(cal: Calendar, ctx: Context, today: Boolean = false): String {
     val moment =
-        if(today)
+        if (today)
             ctx.getString(R.string.all_tday)
         else
             getWeekName(cal.get(Calendar.DAY_OF_WEEK), ctx)
 
     val hour = cal.get(Calendar.HOUR_OF_DAY)
     val min = cal.get(Calendar.MINUTE)
-    return "${moment}, ${ if(hour > 9) hour else "0$hour" }:${if(min > 9) min else "0$min"}"
+    return "${moment}, ${if (hour > 9) hour else "0$hour"}:${if (min > 9) min else "0$min"}"
 }
 
 fun getWeekName(dayOfWeek: Int, ctx: Context) =
-    when(dayOfWeek) {
+    when (dayOfWeek) {
         Calendar.SUNDAY -> ctx.getString(R.string.all_day_of_week_sunday)
         Calendar.MONDAY -> ctx.getString(R.string.all_day_of_week_monday)
         Calendar.TUESDAY -> ctx.getString(R.string.all_day_of_week_tuesday)
@@ -151,13 +157,18 @@ fun getWeekName(dayOfWeek: Int, ctx: Context) =
 
 fun Fragment.showInfoAlertDialog(
     message: String,
+    buttonMessage: String? = null,
     actionPos: Runnable? = null
 ) {
-    val dialog = MaterialAlertDialogBuilder(requireContext(), R.style.ThemeOverlay_CSGOMatches_MaterialAlertDialog).create()
+    val dialog = MaterialAlertDialogBuilder(
+        requireContext(),
+        R.style.ThemeOverlay_CSGOMatches_MaterialAlertDialog
+    ).create()
     val binding = ViewAllInfoBinding.inflate(LayoutInflater.from(context), null, false)
     binding.run {
+        buttonMessage?.let { buttonAllInfoOk.text = it }
         textViewAllMsg.text = message
-        buttonAllInfoOk.setOnClickListener{
+        buttonAllInfoOk.setOnClickListener {
             actionPos?.run()
             dialog.dismiss()
         }
@@ -169,7 +180,7 @@ fun Fragment.showInfoAlertDialog(
 
 fun LayoutAllToolbarBinding.setupToolbarWithNavController(
     frg: Fragment
-){
+) {
     frg.findNavController().let { navController ->
         AppBarConfiguration(navController.graph).let {
             this.toolbar.setupWithNavController(navController, it)

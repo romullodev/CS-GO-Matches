@@ -1,8 +1,6 @@
 package com.fuzy.csgomatches.ui.details
 
 import android.os.Bundle
-import android.util.TypedValue
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +13,7 @@ import com.fuzy.csgomatches.ui.details.adapter.MatchDetailsAdapter
 import com.fuzy.csgomatches.util.BaseFragment
 import com.fuzy.csgomatches.util.GlobalConstants.Companion.FIRST_OPPONENT
 import com.fuzy.csgomatches.util.GlobalConstants.Companion.SECOND_OPPONENT
+import com.fuzy.csgomatches.util.formatTimeFromIso8601
 import com.fuzy.csgomatches.util.setupToolbarWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,21 +42,18 @@ class MatchDetailsFragment : BaseFragment() {
         super.baseSetupToolbar()
         binding.run {
             layoutAppBarDetails.setupToolbarWithNavController(this@MatchDetailsFragment)
-            layoutAppBarDetails.textViewToolbarTitle.run {
-                "${args.matchDetail.league.name} | ${args.matchDetail.serie.name}".let {
-                    text = it
-                }
-                setTextSize(
-                    TypedValue.COMPLEX_UNIT_PX,
-                    resources.getDimension(R.dimen.textsize_large)
-                )
-                gravity = Gravity.CENTER
+            layoutAppBarDetails.toolbar.run {
+                title = args.matchDetail.league.name
+                subtitle = args.matchDetail.serie.name
+                isTitleCentered = true
+                isSubtitleCentered = true
             }
         }
     }
 
     private fun setupArgs() {
         binding.run {
+            binding.textViewDetailsMatchStatus.text = args.matchDetail.scheduleAt.formatTimeFromIso8601(root.context)
             args.matchDetail.opponents[FIRST_OPPONENT].opponent.let { firstOpponent ->
                 args.matchDetail.opponents[SECOND_OPPONENT].opponent.let { secondOpponent ->
                     recyclerViewMatchDetails.adapter = MatchDetailsAdapter(

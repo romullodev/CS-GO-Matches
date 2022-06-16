@@ -1,12 +1,9 @@
 package com.fuzy.csgomatches.external
 
-import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.fuzy.csgomatches.di.IoDispatcher
-import com.fuzy.csgomatches.domain.entities.Match
 import com.fuzy.csgomatches.domain.errors.AppErrors
 import com.fuzy.csgomatches.domain.errors.GenericError
 import com.fuzy.csgomatches.external.MatchPagingSource.Companion.DEFAULT_PAGE_SIZE
@@ -49,19 +46,15 @@ class RemoteDataSourceImpl @Inject constructor(
         }
     }
 
-    override fun getMatchesObservable(): LiveData<PagingData<Match>> {
-        return Pager(
+    override fun getMatchesObservable() = Pager(
             config = getDefaultPageConfig(),
             pagingSourceFactory = { MatchPagingSource(apiService) }
         ).liveData
-    }
 
-    private fun getDefaultPageConfig(): PagingConfig {
-        return PagingConfig(
+    private fun getDefaultPageConfig() = PagingConfig(
             pageSize = DEFAULT_PAGE_SIZE,
             enablePlaceholders = true,
             initialLoadSize = DEFAULT_PAGE_SIZE,
             prefetchDistance = DEFAULT_PREFETCH_DISTANCE
         )
-    }
 }
