@@ -21,6 +21,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Fixed
 
+## [1.0.1]
+
+## Added
+- TimeUtil interface
+- tests to validate formatTimeFromIso8601 extension
+
+## Changed
+
+## Removed
+
+## Fixed
+
 ## [1.0.0]
 
 ## Added
