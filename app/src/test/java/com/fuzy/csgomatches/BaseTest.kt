@@ -36,7 +36,6 @@ open class BaseTest {
         }
     }
 
-
     protected val repository: Repository by lazy {
         RepositoryImpl(remoteDataSource)
     }
