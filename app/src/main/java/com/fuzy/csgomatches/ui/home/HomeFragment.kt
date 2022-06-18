@@ -23,11 +23,21 @@ import java.security.interfaces.RSAKey
 class HomeFragment : BaseFragment() {
 
     private val viewModel: HomeViewModel by activityViewModels()
-    private lateinit var adapter: MatchPagedAdapter
+
     private lateinit var stateAdapter: LoaderMatchStateAdapter
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.fetchMatches().observe(requireActivity()) {
+            lifecycleScope.launch {
+                viewModel.adapter.submitData(it)
+            }
+        }
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,41 +66,14 @@ class HomeFragment : BaseFragment() {
 
     override fun baseSetupAdapters() {
         super.baseSetupAdapters()
-        adapter = MatchPagedAdapter {
-            viewModel.getMatchDetails(it)
-        }
-
-        adapter.addLoadStateListener { loadState ->
-            if (loadState.source.refresh is LoadState.NotLoading) {
-                viewModel.hideDialog()
-            } else {
-                if(loadState.source.refresh is LoadState.Error){
-                    viewModel.hideDialog()
-                    showInfoAlertDialog(
-                        getString(R.string.an_error_occurred_try_again),
-                        getString(R.string.try_again)
-                    ) { adapter.retry() }
-                }else {
-                    if(loadState.source.refresh is LoadState.Loading){
-                        viewModel.showDialog()
-                    }
-                }
-            }
-        }
-
-        stateAdapter = LoaderMatchStateAdapter{ adapter.retry() }
-        binding.recyclerViewHome.adapter = adapter.withLoadStateFooter(
+        stateAdapter = LoaderMatchStateAdapter{ viewModel.adapter.retry() }
+        binding.recyclerViewHome.adapter = viewModel.adapter.withLoadStateFooter(
             footer = stateAdapter
         )
     }
 
     override fun baseSetupObservers() {
         super.baseSetupObservers()
-        viewModel.fetchMatches().observe(viewLifecycleOwner) {
-            lifecycleScope.launch {
-                adapter.submitData(it)
-            }
-        }
 
         viewModel.homeState.observe(viewLifecycleOwner){
             it.getContentIfNotHandled()?.let { state ->
@@ -105,7 +88,8 @@ class HomeFragment : BaseFragment() {
                     }
                     is HomeViewModel.HomeStates.HomeAlertDialog -> showInfoAlertDialog(
                         message = getString(state.msg ?: R.string.an_error_occurred_try_again),
-                        actionPos = null
+                        buttonMessage = getString(state.buttonMessage ?: R.string.all_ok_button),
+                        actionPos = state.posButtonAction
                     )
                 }
             }
@@ -116,6 +100,10 @@ class HomeFragment : BaseFragment() {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
 }
